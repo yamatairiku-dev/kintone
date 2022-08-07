@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-
   // レコード一覧画面の表示後イベント
   kintone.events.on('app.record.index.show', (event) => {
     if (document.getElementById('fetch-forecast-button') !== null) {
@@ -43,6 +42,5 @@
     }
 
   });
-
 
 })();
