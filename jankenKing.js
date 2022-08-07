@@ -7,6 +7,7 @@
     const startButton = document.createElement('button');
     startButton.id = 'janken_start_button';
     startButton.innerText = 'ジャンケンキングに挑戦！！';
+    startButton.className = 'btn btn-info';
     myHeaderMenuSpace.innerText = '';
 
     const jankenItems = ['グー', 'チョキ', 'パー'];
@@ -18,9 +19,11 @@
       jankenSpace.style.width = '400px';
       jankenSpace.parentNode.style.width = '400px';
 
+      const buttonColor = ['btn btn-primary','btn btn-danger','btn btn-warning'];
       for (let i = 0; i < jankenItems.length; i++) {
         const tmpButton = document.createElement('button');
         tmpButton.id = 'j_button' + i;
+        tmpButton.className = buttonColor[i];
         tmpButton.innerText = jankenItems[i] + '！！';
         tmpButton.onclick = (e) => {
           const you = e.target.id.replace('j_button', '');
