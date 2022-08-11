@@ -10,7 +10,7 @@
     const fetchForecastButton = document.createElement('button');
     fetchForecastButton.id = 'fetch-forecast-button';
     fetchForecastButton.innerText = '今日の富山県の天気';
-    fetchForecastButton.className = 'btn btn-info';
+    fetchForecastButton.className = 'kintoneplugin-button-normal';
     kintone.app.getHeaderMenuSpaceElement().appendChild(fetchForecastButton);
 
     // ボタンクリック時の処理
