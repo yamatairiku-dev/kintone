@@ -1,33 +1,61 @@
 (() => {
   'use strict';
+  // コピー対象フィールド名とコピーボタン配置フィールド名のペアを設定
+  const copyButtonElements = [
+    {targetFieldName: 'コピー対象', btnFieldName: 'copy_button'},
+    {targetFieldName: 'コピー対象2', btnFieldName: 'copy_button2'},
+    {targetFieldName: 'コピー対象3', btnFieldName: 'copy_button3'},
+  ];
 
-  function createCpoyButton(event) {
-    const copyButtonText = 'クリップボードへコピー';
-    const copiedButtonText = 'コピー済み';
-    const record = event.record;
-    const copyButton = document.createElement('button');
-    copyButton.id = 'copy_button';
-    copyButton.innerText = copyButtonText;
-    copyButton.className = 'kintoneplugin-button-normal';
-    const targetText = record['コピー対象'].value;
+  const btnNums = copyButtonElements.length;
+  const copyButtonText = 'クリップボードへコピー';
+  const copiedButtonText = 'Copied!';
 
-    copyButton.onclick = async () => {
-      try {
-        await navigator.clipboard.writeText(targetText);
-        copyButton.innerText = copiedButtonText;
-        setTimeout(() => {
-          copyButton.innerText = copyButtonText;
-        }, 1000);
-      } catch (error) {
-        alert((error && error.message) || 'コピーに失敗しました');
-      }
-    };
+  // 対象イベント：新規、詳細、編集画面表示
+  const showEvents = ['app.record.create.show', 'app.record.detail.show', 'app.record.edit.show'];
 
-    kintone.app.record.getSpaceElement('copy_button').appendChild(copyButton);
+  // 対象イベント：新規、編集画面でコピー対象フィールドの値の変更 + shwoEvwnts
+  const changeEvents = [];
+  for (let i = 0; i < btnNums; i++) {
+    const element = copyButtonElements[i].targetFieldName;
+    changeEvents.push(`app.record.create.change.${element}`);
+    changeEvents.push(`app.record.edit.change.${element}`);
+  }
+  changeEvents.push(showEvents);
 
+  function createCopyButton(event) {
+    for (let i = 0; i < btnNums; i++) {
+      const element = copyButtonElements[i];
+      const copyButton = document.createElement('button');
+      copyButton.id = element.btnFieldName;
+      copyButton.innerText = copyButtonText;
+      copyButton.className = 'kintoneplugin-button-normal';
+      kintone.app.record.getSpaceElement(element.btnFieldName).appendChild(copyButton);
+    }
   }
 
-  const events = ['app.record.detail.show', 'app.record.edit.show'];
-  kintone.events.on(events, createCpoyButton);
+  function attachOnClickEvent(event) {
+    const record = event.record;
+
+    for (let i = 0; i < btnNums; i++) {
+      const element = copyButtonElements[i];
+      const button = document.getElementById(element.btnFieldName);
+      button.onclick = async () => {
+        const targetText = record[element.targetFieldName].value;
+        try {
+          await navigator.clipboard.writeText(targetText);
+          button.innerText = copiedButtonText;
+          setTimeout(() => {
+            button.innerText = copyButtonText;
+          }, 1000);
+        } catch (error) {
+          alert((error && error.message) || 'コピーに失敗しました');
+        }
+      };
+    }
+  }
+
+  kintone.events.on(showEvents, createCopyButton);
+  kintone.events.on(changeEvents, attachOnClickEvent);
 
 })();
