@@ -14,7 +14,7 @@
   // 対象イベント：新規、詳細、編集画面表示
   const showEvents = ['app.record.create.show', 'app.record.detail.show', 'app.record.edit.show'];
 
-  // 対象イベント：新規、編集画面でコピー対象フィールドの値の変更 + shwoEvwnts
+  // 対象イベント：新規、編集画面でコピー対象フィールドの値の変更 + showEvents
   const changeEvents = [];
   for (let i = 0; i < btnNums; i++) {
     const element = copyButtonElements[i].targetFieldName;
