@@ -49,6 +49,7 @@
       const aTag = document.createElement('a');
       aTag.href = data[1];
       aTag.innerText = data[0];
+      aTag.target = '_blank';
       return aTag;
     };
 
