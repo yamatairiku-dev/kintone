@@ -27,7 +27,7 @@ kintone.events.on(['app.record.index.show'], (event) => {
   const Kuc = Kucs['1.15.0'];
 
   const input = new Kuc.Text({
-    placeholder: '検索キーワード',
+    placeholder: 'タイトルを検索',
     value: textValue,
     // className: 'ui-component-margin',
   });
