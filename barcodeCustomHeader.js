@@ -34,12 +34,12 @@ kintone.events.on(['app.record.index.show'], (event) => {
   const searchButton = new Kuc.Button({
     type: 'submit',
     text: '検索',
-    className: 'ui-component-index-margin',
+    className: 'ui-component-index-margin ui-component-button-small',
   });
   const clearButton = new Kuc.Button({
     type: 'normal',
     text: 'クリア',
-    className: 'ui-component-index-margin',
+    className: 'ui-component-index-margin ui-component-button-small',
   });
 
   div.appendChild(input);

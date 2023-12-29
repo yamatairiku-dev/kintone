@@ -21,6 +21,10 @@
   --kuc-table-header-5-width: 25rem;
   --kuc-table-header-6-width: 7rem;
 }
+.ui-component-button-small {
+  --kuc-button-width: 6rem;
+  --kuc-button-height: 2.6rem;
+}
 #my-customized-view table th {
   font-weight: 500;
   border: solid 1px #eee;
