@@ -439,7 +439,12 @@
     kintoneEvent.record[descriptionInput].value = volumeInfo.description;
     kintoneEvent.record[publisherInput].value = volumeInfo.publisher;
     kintoneEvent.record[infoLinkInput].value = volumeInfo.infoLink;
-    const thumbnailUrl = volumeInfo.imageLinks.thumbnail;
+    let thumbnailUrl = '';
+    if (volumeInfo.imageLinks === undefined) {
+      thumbnailUrl = 'https://books.google.co.jp/googlebooks/images/no_cover_thumb.gif';
+    } else {
+      thumbnailUrl = volumeInfo.imageLinks.thumbnail;
+    }
     kintoneEvent.record[thumbnailUrlInput].value = thumbnailUrl;
     document.getElementById(thumbnailWrapper).src = thumbnailUrl;
   };
