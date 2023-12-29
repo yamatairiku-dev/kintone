@@ -2,23 +2,11 @@
   "app": "5",
   "scope": "ALL",
   "desktop": {
-    "js": [
-      "https://localhost:3000/quagga.min.js",
-      "https://localhost:3000/kuc.min.js",
-      "https://localhost:3000/barcodeCustomHeader.js",
-      "https://localhost:3000/barcodeCustomView.js",
-      "https://localhost:3000/barcodeMain.js"
-    ],
-    "css": ["https://localhost:3000/forKintoneUiComponent.css"]
+    "js": ["quagga.min.js", "kuc.min.js", "barcodeCustomHeader.js", "barcodeCustomView.js", "barcodeMain.js"],
+    "css": ["forKintoneUiComponent.css"]
   },
   "mobile": {
-    "js": [
-      "https://localhost:3000/quagga.min.js",
-      "https://localhost:3000/kuc.min.js",
-      "https://localhost:3000/barcodeCustomHeaderSP.js",
-      "https://localhost:3000/barcodeCustomViewSP.js",
-      "https://localhost:3000/barcodeMainSP.js"
-    ],
-    "css": ["https://localhost:3000/forKintoneUiComponentSP.css"]
+    "js": ["quagga.min.js", "kuc.min.js", "barcodeCustomHeaderSP.js", "barcodeCustomViewSP.js", "barcodeMainSP.js"],
+    "css": ["forKintoneUiComponentSP.css"]
   }
 }
