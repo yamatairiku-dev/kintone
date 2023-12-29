@@ -1,0 +1,32 @@
+.ui-component-index-margin {
+  margin-left: 0.5rem;
+}
+.ui-component-edit-margin {
+  margin-left: 0.5rem;
+}
+.ui-component-index-table-wrapper {
+  margin-left: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.ui-component-index-margin-right {
+  margin-right: 0.5rem;
+}
+.ui-component-table-header {
+  --kuc-table-header-font-size: '16px';
+  --kuc-table-header-1-width: 14rem;
+  --kuc-table-header-2-width: 14rem;
+  --kuc-table-header-3-width: 7rem;
+  --kuc-table-header-4-width: 24rem;
+  --kuc-table-header-5-width: 10rem;
+}
+#my-customized-view table th {
+  font-weight: 500;
+  border: solid 1px #eee;
+}
+#my-customized-view table td {
+  background: #efefef;
+}
+#my-customized-view table tr:nth-child(odd) td {
+  background: #fff;
+}
