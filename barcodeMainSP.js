@@ -12,6 +12,7 @@
   const thumbnailWrapper = 'thumbnail-wrapper';
   const descriptionInput = 'description_input';
   const infoLinkInput = 'info_link_input';
+  const publisherInput = 'publisher_input';
   const isbnApiUrl = 'https://www.googleapis.com/books/v1/volumes?q=isbn:';
   // eslint-disable-next-line no-undef
   // const Kuc = Kucs['1.15.0'];
@@ -436,6 +437,7 @@
     kintoneEvent.record[authorsInput].value = volumeInfo.authors.join(', ');
     kintoneEvent.record[publishedDateInput].value = volumeInfo.publishedDate;
     kintoneEvent.record[descriptionInput].value = volumeInfo.description;
+    kintoneEvent.record[publisherInput].value = volumeInfo.publisher;
     kintoneEvent.record[infoLinkInput].value = volumeInfo.infoLink;
     const thumbnailUrl = volumeInfo.imageLinks.thumbnail;
     kintoneEvent.record[thumbnailUrlInput].value = thumbnailUrl;
@@ -454,8 +456,9 @@
             volumeInfo = bookData.items[0].volumeInfo;
             const selfLink = bookData.items[0].selfLink;
             kintone.proxy(selfLink, 'GET', {}, {}).then((info) => {
-              const description = JSON.parse(info[0]).volumeInfo.description;
-              volumeInfo.description = description;
+              const volumeInfo2 = JSON.parse(info[0]).volumeInfo;
+              volumeInfo.description = volumeInfo2.description;
+              volumeInfo.publisher = volumeInfo2.publisher;
               resolve(volumeInfo);
             });
           } else {

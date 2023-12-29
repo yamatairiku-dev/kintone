@@ -21,6 +21,7 @@
     const thumbnailUrl = 'thumbnail_url_input';
     const infoLink = 'info_link_input';
     const description = 'description_input';
+    const publisher = 'publisher_input';
     const rentalUser = 'rental_user_input';
 
     const recordData = [];
@@ -30,6 +31,7 @@
         authors: records[i][authors].value,
         publishedDate: records[i][publishedDate].value,
         description: records[i][description].value,
+        publisher: records[i][publisher].value,
         thumbnailUrl: [records[i][thumbnailUrl].value, records[i]['レコード番号'].value],
         rentalUser: records[i][rentalUser].value[0],
       };
@@ -97,8 +99,13 @@
           visible: false, // moileは非表示
         },
         {
+          title: '出版社',
+          field: 'publisher',
+        },
+        {
           title: '出版日',
           field: 'publishedDate',
+          visible: false, // moileは非表示
         },
         {
           title: '説明',
