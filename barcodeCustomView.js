@@ -33,10 +33,11 @@
         description: records[i][description].value,
         publisher: records[i][publisher].value,
         thumbnailUrl: [records[i][thumbnailUrl].value, records[i]['レコード番号'].value],
-        rentalUser: records[i][rentalUser].value[0],
+        rentalUser: records[i][rentalUser].value,
+        // フィールドをユーザー選択にした場合
+        // rentalUser: records[i][rentalUser].value[0],
       };
     }
-
     const renderThumbnail = (data) => {
       const img = document.createElement('img');
       const aTag = document.createElement('a');
@@ -67,16 +68,17 @@
       return span;
     };
 
-    const renderRentalUser = (data) => {
-      console.log(data);
-      const span = document.createElement('span');
-      if (data === undefined) {
-        span.innerText = '';
-      } else {
-        span.innerText = data.name;
-      }
-      return span;
-    };
+    // フィールドをユーザー選択にした場合
+    // const renderRentalUser = (data) => {
+    //   console.log(data);
+    //   const span = document.createElement('span');
+    //   if (data === undefined) {
+    //     span.innerText = '';
+    //   } else {
+    //     span.innerText = data.name;
+    //   }
+    //   return span;
+    // };
 
     // eslint-disable-next-line no-undef
     const table = new Kuc.Table({
@@ -116,7 +118,8 @@
         {
           title: '借りてる人',
           field: 'rentalUser',
-          render: renderRentalUser,
+          // フィールドをユーザー選択にした場合
+          // render: renderRentalUser,
         },
       ],
       data: recordData,
