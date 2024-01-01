@@ -15,11 +15,11 @@
 .ui-component-table-header {
   --kuc-table-header-font-size: '16px';
   --kuc-table-header-1-width: 14rem;
-  --kuc-table-header-2-width: 10rem;
-  --kuc-table-header-3-width: 10rem;
+  --kuc-table-header-2-width: 8rem;
+  --kuc-table-header-3-width: 8rem;
   --kuc-table-header-4-width: 7rem;
-  --kuc-table-header-5-width: 25rem;
-  --kuc-table-header-6-width: 7rem;
+  --kuc-table-header-5-width: 20rem;
+  --kuc-table-header-6-width: 14rem;
 }
 .ui-component-button-small {
   --kuc-button-width: 6rem;

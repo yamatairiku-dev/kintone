@@ -22,7 +22,9 @@
     const infoLink = 'info_link_input';
     const description = 'description_input';
     const publisher = 'publisher_input';
-    const rentalUser = 'rental_user_input';
+    const rentalUserTable = 'rental_user_table';
+    const rentalUser = 'rental_user';
+    const rentalDate = 'rental_date';
 
     const recordData = [];
     for (let i = 0; i < records.length; i++) {
@@ -33,9 +35,7 @@
         description: records[i][description].value,
         publisher: records[i][publisher].value,
         thumbnailUrl: [records[i][thumbnailUrl].value, records[i]['レコード番号'].value],
-        rentalUser: records[i][rentalUser].value,
-        // フィールドをユーザー選択にした場合
-        // rentalUser: records[i][rentalUser].value[0],
+        rentalUser: records[i][rentalUserTable].value,
       };
     }
     const renderThumbnail = (data) => {
@@ -58,7 +58,7 @@
 
     const renderDiscription = (data) => {
       const span = document.createElement('span');
-      const MAX_LENGTH = '75';
+      const MAX_LENGTH = '55';
       const dataLength = data.length;
       if (dataLength > MAX_LENGTH) {
         span.innerText = data.substr(0, MAX_LENGTH) + '...';
@@ -69,16 +69,31 @@
     };
 
     // フィールドをユーザー選択にした場合
-    // const renderRentalUser = (data) => {
-    //   console.log(data);
-    //   const span = document.createElement('span');
-    //   if (data === undefined) {
-    //     span.innerText = '';
-    //   } else {
-    //     span.innerText = data.name;
-    //   }
-    //   return span;
-    // };
+    const renderRentalUser = (data) => {
+      const div = document.createElement('span');
+      for (let i = 0; i < data.length; i++) {
+        let dateText = data[i].value[rentalDate].value;
+        if (!dateText) {
+          dateText = '';
+        } else {
+          dateText = '@' + dateText;
+        }
+        // userArrがない場合の考慮不要
+        const userArr = data[i].value[rentalUser].value;
+        let userText = '';
+        for (let index = 0; index < userArr.length; index++) {
+          if (index > 0) {
+            userText += ',';
+          }
+          userText += userArr[index].name;
+        }
+        const span = document.createElement('span');
+        span.style = 'display: inline-block';
+        span.innerText = userText + dateText;
+        div.appendChild(span);
+      }
+      return div;
+    };
 
     // eslint-disable-next-line no-undef
     const table = new Kuc.Table({
@@ -118,8 +133,7 @@
         {
           title: '借りてる人',
           field: 'rentalUser',
-          // フィールドをユーザー選択にした場合
-          // render: renderRentalUser,
+          render: renderRentalUser,
         },
       ],
       data: recordData,
