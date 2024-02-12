@@ -434,10 +434,10 @@
   const setBookBataToField = (volumeInfo, kintoneEvent) => {
     // 本の情報をkintoneに設定
     kintoneEvent.record[titleInput].value = volumeInfo.title;
-    kintoneEvent.record[authorsInput].value = volumeInfo.authors.join(', ');
-    kintoneEvent.record[publishedDateInput].value = volumeInfo.publishedDate;
-    kintoneEvent.record[descriptionInput].value = volumeInfo.description;
-    kintoneEvent.record[publisherInput].value = volumeInfo.publisher;
+    kintoneEvent.record[authorsInput].value = volumeInfo.authors ? volumeInfo.authors.join(', ') : '';
+    kintoneEvent.record[publishedDateInput].value = volumeInfo.publishedDate ? volumeInfo.publishedDate : '';
+    kintoneEvent.record[descriptionInput].value = volumeInfo.description ? volumeInfo.description : '';
+    kintoneEvent.record[publisherInput].value = volumeInfo.publisher ? volumeInfo.publisher : '';
     kintoneEvent.record[infoLinkInput].value = volumeInfo.infoLink;
     let thumbnailUrl = '';
     if (volumeInfo.imageLinks === undefined) {

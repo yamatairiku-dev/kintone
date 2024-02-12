@@ -434,10 +434,10 @@
   const setBookBataToField = (volumeInfo, kintoneEvent) => {
     // 本の情報をkintoneに設定
     kintoneEvent.record[titleInput].value = volumeInfo.title;
-    kintoneEvent.record[authorsInput].value = volumeInfo.authors.join(', ');
-    kintoneEvent.record[publishedDateInput].value = volumeInfo.publishedDate;
-    kintoneEvent.record[descriptionInput].value = volumeInfo.description;
-    kintoneEvent.record[publisherInput].value = volumeInfo.publisher;
+    kintoneEvent.record[authorsInput].value = volumeInfo.authors ? volumeInfo.authors.join(', ') : '';
+    kintoneEvent.record[publishedDateInput].value = volumeInfo.publishedDate ? volumeInfo.publishedDate : '';
+    kintoneEvent.record[descriptionInput].value = volumeInfo.description ? volumeInfo.description : '';
+    kintoneEvent.record[publisherInput].value = volumeInfo.publisher ? volumeInfo.publisher : '';
     kintoneEvent.record[infoLinkInput].value = volumeInfo.infoLink;
     let thumbnailUrl = '';
     if (volumeInfo.imageLinks === undefined) {
@@ -475,25 +475,28 @@
   };
 
   // PC:ISBN情報を編集したとき
-  kintone.events.on(['mobile.app.record.create.change.' + barcodeInput, 'mobile.app.record.edit.change.' + barcodeInput], (event) => {
-    document.getElementById(isbnButton).onclick = () => {
-      const isbnCode = event.record[barcodeInput].value;
-      if (isbnCode.length === 13) {
-        // isbnCode = '9784863544208'
-        // APIを呼び出し
-        getVolumeInfo(isbnApiUrl + isbnCode).then((volumeInfo) => {
-          if (volumeInfo !== '') {
-            setBookBataToField(volumeInfo, event);
-          } else {
-            alert('ISBNコードに対応する本の情報が見つかりませんでした ^^;');
-          }
-          kintone.mobile.app.record.set(event);
-        });
-      } else {
-        alert('ISBN番号は13桁必要です');
-      }
-    };
-  });
+  kintone.events.on(
+    ['mobile.app.record.create.change.' + barcodeInput, 'mobile.app.record.edit.change.' + barcodeInput],
+    (event) => {
+      document.getElementById(isbnButton).onclick = () => {
+        const isbnCode = event.record[barcodeInput].value;
+        if (isbnCode.length === 13) {
+          // isbnCode = '9784863544208'
+          // APIを呼び出し
+          getVolumeInfo(isbnApiUrl + isbnCode).then((volumeInfo) => {
+            if (volumeInfo !== '') {
+              setBookBataToField(volumeInfo, event);
+            } else {
+              alert('ISBNコードに対応する本の情報が見つかりませんでした ^^;');
+            }
+            kintone.mobile.app.record.set(event);
+          });
+        } else {
+          alert('ISBN番号は13桁必要です');
+        }
+      };
+    }
+  );
 
   // PC:詳細画面表示
   kintone.events.on(['mobile.app.record.detail.show'], (event) => {
